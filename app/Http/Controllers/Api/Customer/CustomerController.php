@@ -14,23 +14,6 @@ use Laravel\Sanctum\PersonalAccessToken;
 class CustomerController extends Controller
 {
 
-    //Check if the customer is not registered
-    public static function RegisterCustomer($name, $email)
-    {
-        //If user found then return it
-        if ($user = User::where('email', $email)->first()) {
-            return $user;
-            //If user not found
-        } else {
-            //Create and return user
-            return User::create([
-                'name' => $name,
-                'email' => $email,
-                'role' => 'customer',
-                'password' => Hash::make('password'),
-            ]);
-        }
-    }
 
     //Check if token is available Or is tokenable
     public static function Tokenable($token)

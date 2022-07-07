@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\Question;
 use App\Models\Answer;
+use App\Models\Question;
+use App\Models\SupportTicket;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -43,6 +44,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //User has many tickets
+    public function tickets()
+    {
+        return $this->hasMany(SupportTicket::class);
+    }
 
     //User has many questions
     public function questions()

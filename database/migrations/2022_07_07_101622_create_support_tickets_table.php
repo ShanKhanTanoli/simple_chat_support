@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('support_tickets', function (Blueprint $table) {
             $table->id();
 
             //User foreign key
@@ -25,8 +25,11 @@ return new class extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->longText('body')->nullable();
-            
+            $table->string('support_type')->nullable();
+
+            $table->enum('status', ['not_answered', 'in_progress', 'answered', 'spam'])
+                ->default('not_answered');
+
             $table->timestamps();
         });
     }
@@ -38,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('support_tickets');
     }
 };

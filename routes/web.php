@@ -1,9 +1,9 @@
 <?php
 
+use App\Helpers\Ticket;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Laravel\Sanctum\PersonalAccessToken;
 
 
 /*
@@ -26,17 +26,12 @@ Route::get('/', function () {
 
 Route::get('debug', function () {
 
-    //$customer = User::where('role','customer')->first();
-    //$customer_token = $customer->createToken('auth-token')->plainTextToken;
-    // $customer_token = "1|Ob31J7D4lXZo1LEcSUrOJxxsMAjiDeCy37Om22dB";
-    // $customer_find_token = PersonalAccessToken::findToken($customer_token);
-    // dd($customer_find_token->tokenable);
+    //customer
+    $customer = User::where('role', 'customer')->first();
+    //agent
+    $agent = User::where('role', 'support')->first();
 
-    //$agent = User::where('role','support')->first();
-    //$agent_token = $agent->createToken('auth-token')->plainTextToken;
-    // $agent_token = "2|O0J3Nxew30CMKUHq7uvpWfNPmztVG8AuXoyUfdDK";
-    // $agent_find_token = PersonalAccessToken::findToken($agent_token);
-    // dd($agent_find_token->tokenable);
+    dd(Ticket::Open("shankhan", "shankhantanoli1@gmail.com", "Technical Support"));
 });
 
 Auth::routes();
