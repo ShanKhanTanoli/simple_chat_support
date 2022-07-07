@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('threads', function (Blueprint $table) {
+        Schema::create('questions', function (Blueprint $table) {
             $table->id();
 
             //User foreign key
@@ -25,19 +25,9 @@ return new class extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            //Support Ticket foreign key
-            $table->unsignedBigInteger('ticket_id')
-                ->nullable();
-            $table->foreign('ticket_id')
-                ->references('id')
-                ->on('tickets')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
             $table->longText('body')->nullable();
             $table->timestamps();
         });
-
     }
 
     /**
@@ -47,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('threads');
+        Schema::dropIfExists('questions');
     }
 };

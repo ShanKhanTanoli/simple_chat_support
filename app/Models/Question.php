@@ -3,23 +3,24 @@
 namespace App\Models;
 
 use App\Models\User;
-use App\Models\Thread;
+use App\Models\Answer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Message extends Model
+class Question extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["thread_id", "user_id", "body"];
+    protected $fillable = ["user_id","body"];
 
-    //Message belongs to thread
-    public function thread()
+
+    //Thread has many answers
+    public function answers()
     {
-        return $this->belongsTo(Thread::class);
+        return $this->hasMany(Answer::class);
     }
 
-    //Message belongs to user
+    //Thread belongs to user
     public function user()
     {
         return $this->belongsTo(User::class);

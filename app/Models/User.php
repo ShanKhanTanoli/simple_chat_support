@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Thread;
-use App\Models\Ticket;
-use App\Models\Message;
+use App\Models\Question;
+use App\Models\Answer;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -46,21 +44,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    //User has many tickets
-    public function tickets()
+    //User has many questions
+    public function questions()
     {
-        return $this->hasMany(Ticket::class);
+        return $this->hasMany(Question::class);
     }
 
-    //User has many threads
-    public function threads()
+    //User has many answers
+    public function answers()
     {
-        return $this->hasMany(Thread::class);
-    }
-
-    //User has many messages
-    public function messages()
-    {
-        return $this->hasMany(Message::class);
+        return $this->hasMany(Answer::class);
     }
 }

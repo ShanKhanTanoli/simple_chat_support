@@ -14,15 +14,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('answers', function (Blueprint $table) {
             $table->id();
 
             //Thread foreign key
-            $table->unsignedBigInteger('thread_id')
+            $table->unsignedBigInteger('question_id')
                 ->nullable();
-            $table->foreign('thread_id')
+            $table->foreign('question_id')
                 ->references('id')
-                ->on('threads')
+                ->on('questions')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
@@ -49,6 +49,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('answers');
     }
 };
