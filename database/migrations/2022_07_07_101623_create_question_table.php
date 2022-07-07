@@ -26,6 +26,9 @@ return new class extends Migration
                 ->onUpdate('cascade');
 
             $table->longText('body')->nullable();
+            $table->enum('status', ['not_answered', 'in_progress', 'answered', 'spam'])
+                ->nullable();
+
             $table->timestamps();
         });
     }

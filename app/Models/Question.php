@@ -11,7 +11,7 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["user_id","body"];
+    protected $fillable = ["user_id", "body", "status"];
 
 
     //Thread has many answers
