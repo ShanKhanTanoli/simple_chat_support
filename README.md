@@ -214,7 +214,7 @@ _ __MAIL_PASSWORD=Your Mail Password__
 ---
 
 ## Email Screenshot
-![Email Notification](https://laraveldaily.com/wp-content/uploads/2019/11/Screen-Shot-2019-11-15-at-6.17.59-PM.png)
+![Email Notification](https://spirtualstore.prosolpk.com/wp-content/uploads/2022/07/Email.png)
 
 ---
 
