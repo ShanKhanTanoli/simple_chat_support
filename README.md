@@ -17,12 +17,15 @@
 
 ## Humble Request
 
+- __Although this is not good enough but Please give me chance to join your team, I will improve myself__
+
 - __If you want me to change/modify anything then please let me know, I will change it asap__
 
 - __Please give me chance to join your team, I will improve myself and I will try my best__
 
 - __I want to learn more and I want to get experience, Please kindly give me chance to join your team__
 
+- __I can make this task more better and also I can use a different logic__
 ---
 
 ## Installation
@@ -188,6 +191,12 @@ _ __MAIL_PASSWORD=Your Mail Password__
 - __Search answer__
 
 - __(GET REQUEST)__ __YourURL/api/support/searchanswer/{token}__.
+
+---
+
+## Auto Update Status (Task Scheduling)
+
+- I am using __CRON JOB__ here. I have created a __METHOD__ that will check if there is a __TICKET__ on which the __CUSTOMER__ did not reply for __24 hours__ then change __STATUS__ to __ANSWERED__
 
 ---
 

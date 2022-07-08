@@ -29,7 +29,21 @@ Route::get('/', function () {
 Route::get('debug', function () {
 
     //customer
-    $customer = User::find(1);
+    $customer = User::find(4);
+
+    $ticket = Ticket::Open($customer->name, $customer->email, "Technical Support");
+
+    dispatch(function () {
+
+        $ticket = Ticket::Find(1);
+
+        $ticket->update([
+            'status' => 'answered',
+        ]);
+    })->delay(now()->addSeconds(2));
+
+    return "success";
+
     //$token = $customer->createToken('auth-token')->plainTextToken;
 
     $token = "1|zfbTpMh4Icz7xXMQOGVutZA93j54Zvt5f9LGisVm";
@@ -37,8 +51,6 @@ Route::get('debug', function () {
     $agent_token = "2|Y9F8sZYaEafdfNwv10TpFPVv04B9OEoRTsm1PEGN";
 
     dd($token);
-
-
 });
 
 Auth::routes();
