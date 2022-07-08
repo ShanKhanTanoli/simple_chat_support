@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,12 @@ use App\Http\Controllers\Api\LoginController;
 
 
 /*Begin::Login API*/
-
 Route::post('login', [LoginController::class, 'login']);
 /*Begin::Login API*/
+
+/*Begin::Register API*/
+Route::post('register', [RegisterController::class, 'register']);
+/*Begin::Register API*/
 
 /*Begin::Support API*/
 include('support/support.php');
