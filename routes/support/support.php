@@ -46,10 +46,6 @@ Route::middleware(['auth:sanctum'])->prefix('support')->group(function () {
     /*Begin::Search*/
 
     //Search ticket
-    Route::post('search/{ticket}/{token}', [SupportController::class, 'searchticket'])
-        ->name('SupportSearchTicket');
-
-    //Search ticket
     Route::get('searchticket/{token}', [SupportController::class, 'searchticket'])
         ->name('SupportSearchTicket');
 
