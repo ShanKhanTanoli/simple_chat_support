@@ -196,8 +196,13 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 ## Auto Update Status (Task Scheduling)
 
-- I am using __CRON JOB__ here. I have created a __METHOD__ that will check if there is a __TICKET__ on which the __CUSTOMER__ did not reply for __24 hours__ then change __STATUS__ to __ANSWERED__
+- There are a lot of ways that we can archieve this goal
 
+- One way is to use __CRON JOB__.
+
+- I am using __CRON JOB__ here. I have created a __METHOD__ that will check if there is a __TICKET__ on which the __CUSTOMER__ did not reply for __24 hours__ then change __STATUS__ to __ANSWERED__.
+
+- You can run this command __php artisan que:work__ It will update the __Tickets STATUS__ to __ANSWERED__ where __CUSTOMER__ did not reply for __24 hours__.
 ---
 
 ## Helpers Methods
