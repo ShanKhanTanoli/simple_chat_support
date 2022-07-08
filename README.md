@@ -36,16 +36,47 @@ Project is developed with Custom Code
 
 ---
 
-## How to use
+## Humble Request
+
+- __If you want me to change/modify anything then please let me know, I will change it asap__
+- __Please give me chance to join your team, I will improve myself__
+- __I want to learn more and I want to get experience, Please kindly give me chance to join your team__
+
+---
+
+## Installation
 
 - Clone the repository with __git clone__
-- Copy __.env.example__ file to __.env__ and edit database credentials there
+- Copy __.env.example__ file to __.env__ and edit following credentials there
+
 - Run __composer install__
 - Run __php artisan key:generate__
 - Run __php artisan migrate or migrate:fresh__ (it has some users with their role defined)
-- That's it: launch the main URL 
-- If you want to login, click `Login` on top-right and use credentials __admin@admin.com__ - __password__ 
-- Agent's credentials are __agent1@agent1.com__ - __password__ 
+- That's it: Now you can use the API 
+---
+## For Algolia
+
+- __ALGOLIA_APP_ID="YOUR APP ID"__
+- __ALGOLIA_SECRET="YOUR KEY"__
+- __ALGOLIA_INDEX_NAME="YOUR INDEX NAME"__
+- __SCOUT_QUEUE=true__
+
+---
+## For Database
+- __DB_DATABASE="YOUR DB"__
+- __DB_USERNAME="DB USERNAME"__
+- __DB_PASSWORD="DB PASSWORD"__
+
+---
+## For Sending Email
+
+- __MAIL_MAILER=smtp__
+- __MAIL_HOST=YOUR MAIL HOST__
+- __MAIL_PORT=Your Mail Port__
+- __MAIL_USERNAME=Your Mail Username__
+_ __MAIL_PASSWORD=Your Mail Password__
+
+- __You can also update other value__
 
 ---
 
