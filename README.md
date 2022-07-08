@@ -191,6 +191,28 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 ---
 
+## Helpers Methods
+
+- __Helpers__ are available in this __namespace App\Helpers;__.
+
+- Available __Helpers__ are __Answer , Question , Ticket__.
+
+- You can use Helper Methods.
+
+---
+
+## Email Notification
+
+- When __Support__ will mark a __Ticket__ as  __Answered__ then an __Email__ will be sent to the customer.
+
+- Available __Helpers__ are __Answer , Question , Ticket__.
+
+- __TicketAnswered__ class is used for sending Email Notification.
+
+- A view __notification-email.blade.php__ is available inside __views/emails__.
+
+---
+
 ## Email Screenshot
 ![Email Notification](https://laraveldaily.com/wp-content/uploads/2019/11/Screen-Shot-2019-11-15-at-6.17.59-PM.png)
 
