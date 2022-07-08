@@ -22,4 +22,16 @@ class Question
     {
         return QuestionModel::find($id);
     }
+
+    //Find question user
+    public static function User($id)
+    {
+        return self::Find($id)->user;
+    }
+
+    //Search question with algolia
+    public static function Search($query)
+    {
+        return QuestionModel::search($query)->get();
+    }
 }

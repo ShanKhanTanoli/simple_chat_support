@@ -5,12 +5,13 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Answer;
 use App\Models\Question;
+use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SupportTicket extends Model
 {
-    use HasFactory;
+    use HasFactory,Searchable;
 
     protected $fillable = ['ticket','user_id', 'support_type', 'status'];
 

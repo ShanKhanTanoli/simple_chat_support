@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Api\Customer;
 
+use App\Helpers\Answer;
+use App\Helpers\Question;
 use App\Models\User;
-use App\Helpers\Thread;
 use App\Helpers\Ticket;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use App\Models\Ticket as ModelsTicket;
 use Laravel\Sanctum\PersonalAccessToken;
 
 class CustomerController extends Controller
@@ -16,147 +15,200 @@ class CustomerController extends Controller
 
 
     //Check if token is available Or is tokenable
-    public static function Tokenable($token)
+    public static function tokenable($token)
     {
+        //Find token
         $find_token = PersonalAccessToken::findToken($token);
         if ($find_token) {
             return $find_token->tokenable;
         } else return false;
     }
 
-    //View all tickets
-    public function Tickets($token)
+    //Check if customer is authenticated
+    public static function authenticated($token)
     {
         //If user is tokenable
-        if ($user = self::Tokenable($token)) {
-            //Display User Tickets
-            return response()->json([
-                'tickets' => ModelsTicket::where('customer_email', $user->email)->get(),
-            ], 200);
-            //If User not found
-        } else return response()->json([
-            'message' => 'Not found',
-        ], 404);
-    }
-
-    //Check if ticket belongs to specific customer
-    public static function IsMyTicket($email)
-    {
-        if ($ticket = Ticket::FindByEmail($email)) {
-            return $ticket;
+        if ($user = self::tokenable($token)) {
+            //Return user
+            return $user;
+            //If user not found
         } else return false;
     }
 
-    //Open a new ticket
-    public function OpenTicket(Request $request, $token)
+    //View all tickets
+    public function tickets($token)
     {
-        //If user is tokenable
-        if ($user = self::Tokenable($token)) {
+        //If user is authenticated
+        if ($user = self::authenticated($token)) {
+            //Display User Tickets
+            return response()->json([
+                'tickets' => $user->tickets,
+            ], 200);
+        } else return response([
+            'message' => 'unauthenticated',
+        ]);
+    }
+
+    //Check if ticket belongs to customer
+    public static function myticket($ticket, $user)
+    {
+        //If ticket found
+        if ($find_ticket = Ticket::Find($ticket)) {
+            //Get user from the ticket
+            if ($find_ticket->user_id == $user->id) {
+                return $find_ticket;
+            } else return false;
+        } else return false;
+    }
+
+    //Check if question belongs to customer
+    public static function myquestion($question, $user)
+    {
+        //If question found
+        if ($find_question = Question::Find($question)) {
+            //Get user from the question
+            if ($find_question->user_id == $user->id) {
+                return $find_question;
+            } else return false;
+        } else return false;
+    }
+
+    //Open a ticket when user is authenticated
+    public function openticket(Request $request, $token)
+    {
+        //If user is authenticated
+        if ($user = self::authenticated($token)) {
             //Validate
             $validated = $request->validate([
-                'name' => 'required|string',
-                'email' => 'required|email',
                 'support_type' => 'required|string',
             ]);
-            //Get user
-            $user = self::RegisterCustomer($validated['name'], $validated['email']);
             //Open a new ticket
-            $ticket = Ticket::Open($user, $validated['support_type']);
+            $ticket = Ticket::Open($user->name, $user->email, $validated['support_type']);
             //Display that ticket
             return response()->json([
                 'ticket' => $ticket,
             ], 200);
-            //If User not found
-        } else return response()->json([
-            'message' => 'Not found',
-        ], 404);
+            //If user is not authenticated then create and authenticate
+        } else return response([
+            'message' => 'unauthenticated',
+        ]);
     }
 
-    //Write a thread
-    public function WriteThread(Request $request, $ticket, $token)
+    //Open a new ticket when user is not authenticated
+    public function newticket(Request $request)
     {
-        //If user is tokenable
-        if ($user = self::Tokenable($token)) {
-            //Validate
-            $validated = $request->validate([
-                'body' => 'required|string',
-            ]);
-            //Check if this is my ticket
-            $find = self::IsMyTicket($user->email);
-            //If this is my own ticket and the ticket i am looking for
-            if ($find && $find->id == $ticket) {
-                //Thread
-                $thread = Thread::Start($user, $find, $validated['body']);
-                //Display that thread
-                return response()->json([
-                    'thread' => $thread,
-                ], 200);
-                //If not my ticket
-            } else return response()->json([
-                'message' => 'Something went wrong',
-            ], 404);
-            //If User not found
-        } else return response()->json([
-            'message' => 'Not found',
-        ], 404);
+        //Validate
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'support_type' => 'required|string',
+        ]);
+        //Open a new ticket
+        $ticket = Ticket::Open($validated['name'], $validated['email'], $validated['support_type']);
+        //Find a customer
+        $customer = User::find($ticket->user_id);
+        $token = $customer->createToken('auth-token')->plainTextToken;
+        //Display that ticket
+        return response()->json([
+            'ticket' => $ticket,
+            'token' => $token,
+            'message' => 'autenticated',
+        ], 200);
     }
 
-    //View all threads
-    public function threads($token)
+    //Ask a question
+    public function askquestion(Request $request, $ticket, $token)
     {
-        //If user is tokenable
-        if ($user = self::Tokenable($token)) {
-            //Display User Tickets
-            return response()->json([
-                'threads' => $user->threads,
-            ], 200);
-            //If User not found
-        } else return response()->json([
-            'message' => 'Not found',
-        ], 404);
-    }
-
-    //View all messages
-    public function messages($token)
-    {
-        //If user is tokenable
-        if ($user = self::Tokenable($token)) {
-            //Display User Tickets
-            return response()->json([
-                'messages' => $user->messages,
-            ], 200);
-            //If User not found
-        } else return response()->json([
-            'message' => 'Not found',
-        ], 404);
-    }
-
-        //Reply to a thread
-        public function threadreply(Request $request, $ticket, $token)
-        {
-            //If user is tokenable
-            if ($user = self::Tokenable($token)) {
+        //If user is authenticated
+        if ($user = self::authenticated($token)) {
+            //If ticket is mine
+            if ($find_ticket = self::myticket($ticket, $user)) {
                 //Validate
                 $validated = $request->validate([
                     'body' => 'required|string',
                 ]);
-                //Check if this is my ticket
-                $find = self::IsMyTicket($user->email);
-                //If this is my own ticket and the ticket i am looking for
-                if ($find && $find->id == $ticket) {
-                    //Thread
-                    $thread = Thread::Start($user, $find, $validated['body']);
-                    //Display that thread
-                    return response()->json([
-                        'thread' => $thread,
-                    ], 200);
-                    //If not my ticket
-                } else return response()->json([
-                    'message' => 'Something went wrong',
-                ], 404);
-                //If User not found
-            } else return response()->json([
-                'message' => 'Not found',
-            ], 404);
-        }
+                //Ask a question
+                $question = Question::Start($user, $find_ticket, $validated['body']);
+                //Display that question
+                return response()->json([
+                    'question' => $question,
+                ], 200);
+                //If not my ticket
+            } else return response([
+                'message' => 'something went wrong',
+            ]);
+            //If user is not authenticated
+        } else return response([
+            'message' => 'unauthenticated',
+        ]);
+    }
+
+    //Give an answer
+    public function giveanswer(Request $request, $ticket, $question, $token)
+    {
+        //If user is authenticated
+        if ($user = self::authenticated($token)) {
+            //If ticket and question is also mine
+            if ($find_ticket = self::myticket($ticket, $user) && $find_question = self::myquestion($question, $user)) {
+                //Validate
+                $validated = $request->validate([
+                    'body' => 'required|string',
+                ]);
+                //Give an answer
+                $answer = Answer::Start($find_ticket, $find_question, $user, $validated['body']);
+                //Display that answer
+                return response()->json([
+                    'answer' => $answer,
+                ], 200);
+                //If not my ticket
+            } else return response([
+                'message' => 'something went wrong',
+            ]);
+            //If user is not authenticated
+        } else return response([
+            'message' => 'unauthenticated',
+        ]);
+    }
+
+    //Get all questions on this ticket
+    public function questions($ticket, $token)
+    {
+        //If user is authenticated
+        if ($user = self::authenticated($token)) {
+            //If ticket and question is also mine
+            if ($find_ticket = self::myticket($ticket, $user)) {
+                //Display questions
+                return response()->json([
+                    'questions' => $find_ticket->questions,
+                ], 200);
+                //If not my ticket
+            } else return response([
+                'message' => 'something went wrong',
+            ]);
+            //If user is not authenticated
+        } else return response([
+            'message' => 'unauthenticated',
+        ]);
+    }
+
+    //Get all answers on this ticket
+    public function answers($question, $token)
+    {
+        //If user is authenticated
+        if ($user = self::authenticated($token)) {
+            //If question and question is also mine
+            if ($find_question = self::myquestion($question, $user)) {
+                //Display answers
+                return response()->json([
+                    'answers' => $find_question->answers,
+                ], 200);
+                //If not my ticket
+            } else return response([
+                'message' => 'something went wrong',
+            ]);
+            //If user is not authenticated
+        } else return response([
+            'message' => 'unauthenticated',
+        ]);
+    }
 }

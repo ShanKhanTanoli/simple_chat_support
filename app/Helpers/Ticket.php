@@ -43,6 +43,14 @@ class Ticket
         ]);
     }
 
+    //Mark as in progress
+    public static function MarkInProgress($ticket)
+    {
+        return $ticket->update([
+            'status' => "in_progress",
+        ]);
+    }
+
     //Mark as answered
     public static function MarkAnswered($user, $ticket)
     {
@@ -63,6 +71,14 @@ class Ticket
         ]);
     }
 
+    //Mark as not answered
+    public static function MarkNotAnswered($ticket)
+    {
+        return $ticket->update([
+            'status' => "not_answered",
+        ]);
+    }
+
     //Mark as spam
     public static function MarkSpam($ticket)
     {
@@ -71,9 +87,27 @@ class Ticket
         ]);
     }
 
-    //Find Ticket
+    //View all tickets
+    public static function All()
+    {
+        return SupportTicket::all();
+    }
+
+    //Find ticket
     public static function Find($id)
     {
         return SupportTicket::find($id);
+    }
+
+    //Find ticket user
+    public static function User($id)
+    {
+        return self::Find($id)->user;
+    }
+
+    //Search ticket with algolia
+    public static function Search($query)
+    {
+        return SupportTicket::search($query)->get();
     }
 }

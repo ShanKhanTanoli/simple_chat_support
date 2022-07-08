@@ -4,12 +4,13 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Question;
+use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Answer extends Model
 {
-    use HasFactory;
+    use HasFactory,Searchable;
 
     protected $fillable = ["question_id","user_id", "body"];
 

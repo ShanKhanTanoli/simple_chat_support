@@ -29,19 +29,16 @@ Route::get('/', function () {
 Route::get('debug', function () {
 
     //customer
-    $customer = User::where('role', 'customer')->first();
-    //agent
-    $agent = User::where('role', 'support')->first();
-    //create a ticket
-    //$ticket = Ticket::Open("shankhan", "shankhantanoli1@gmail.com", "Technical Support");
-    $ticket = Ticket::Find(1);
-    //ask a question
-    //$question = Question::Start($agent, $ticket, "Is there anything else you want to know?");
-    //$question = Question::Find(2);
-    //give an answer
-    //$answer = Answer::Start($ticket,$question,$customer, "Thanks for your support.Take care bye");
+    $customer = User::find(1);
+    //$token = $customer->createToken('auth-token')->plainTextToken;
 
-    dd(Ticket::MarkAnswered($customer, $ticket));
+    $token = "1|zfbTpMh4Icz7xXMQOGVutZA93j54Zvt5f9LGisVm";
+
+    $agent_token = "2|Y9F8sZYaEafdfNwv10TpFPVv04B9OEoRTsm1PEGN";
+
+    dd($token);
+
+
 });
 
 Auth::routes();
