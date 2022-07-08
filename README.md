@@ -28,6 +28,14 @@ Project is developed with Custom Code
 
 ---
 
+## Author
+
+- Author __Shan Khan__
+- Email __shankhantanoli1@gmail.com__
+- Run __composer install__
+
+---
+
 ## How to use
 
 - Clone the repository with __git clone__
