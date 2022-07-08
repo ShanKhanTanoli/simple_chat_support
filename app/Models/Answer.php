@@ -11,7 +11,7 @@ class Answer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["user_id", "body"];
+    protected $fillable = ["question_id","user_id", "body"];
 
     //Answer belongs to question
     public function question()

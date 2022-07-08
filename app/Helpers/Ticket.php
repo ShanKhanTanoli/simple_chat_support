@@ -3,8 +3,11 @@
 namespace App\Helpers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
+use App\Mail\TicketAnswered;
 use App\Models\SupportTicket;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class Ticket
 {
@@ -34,8 +37,37 @@ class Ticket
         $customer = self::RegisterCustomer($name, $email);
         //Return this Ticket
         return SupportTicket::create([
+            'ticket' => strtoupper("#" . Str::random(10)),
             'user_id' => $customer->id,
             'support_type' => $support_type,
+        ]);
+    }
+
+    //Mark as answered
+    public static function MarkAnswered($user, $ticket)
+    {
+        //pass the data to view
+        $data = [
+            'to' => $user->email,
+            'subject' => 'Ticket Answered',
+            'customer_name' => $user->name,
+            'ticket' => $ticket->ticket,
+            'support_type' => $ticket->support_type,
+            'status' => "answered",
+        ];
+
+        //Send Notification Mail
+        Mail::send(new TicketAnswered($data));
+        return $ticket->update([
+            'status' => "answered",
+        ]);
+    }
+
+    //Mark as spam
+    public static function MarkSpam($ticket)
+    {
+        return $ticket->update([
+            'status' => "spam",
         ]);
     }
 

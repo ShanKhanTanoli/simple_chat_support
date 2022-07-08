@@ -7,11 +7,12 @@ use App\Models\Question as QuestionModel;
 class Question
 {
     //Write a Question
-    public static function Start($user, $body)
+    public static function Start($user, $ticket, $body)
     {
         //Return this Question
         return QuestionModel::create([
             'user_id' => $user->id,
+            'support_ticket_id' => $ticket->id,
             'body' => $body,
         ]);
     }

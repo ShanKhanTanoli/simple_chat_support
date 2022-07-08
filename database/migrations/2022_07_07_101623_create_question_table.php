@@ -25,8 +25,17 @@ return new class extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
+            //Support ticket foreign key
+            $table->unsignedBigInteger('support_ticket_id')
+                ->nullable();
+            $table->foreign('support_ticket_id')
+                ->references('id')
+                ->on('support_tickets')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
             $table->longText('body')->nullable();
-            
+
             $table->timestamps();
         });
     }

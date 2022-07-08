@@ -12,8 +12,7 @@ class SupportTicket extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'support_type', 'status'];
-
+    protected $fillable = ['ticket','user_id', 'support_type', 'status'];
 
     //Ticket belongs to user
     public function user()

@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('support_tickets', function (Blueprint $table) {
             $table->id();
 
+            $table->string('ticket')->nullable();
+
             //User foreign key
             $table->unsignedBigInteger('user_id')
                 ->nullable();
