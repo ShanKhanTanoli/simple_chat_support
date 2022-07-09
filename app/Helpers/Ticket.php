@@ -88,8 +88,8 @@ class Ticket
                 'status' => "answered",
             ]);
             return true;
-        //If customer not found
-        }else return false;
+            //If customer not found
+        } else return false;
     }
 
     //Mark as spam
@@ -136,5 +136,30 @@ class Ticket
     public static function Search($query)
     {
         return SupportTicket::search($query)->get();
+    }
+
+    //Mark as not answered
+    public static function PendingAnswers()
+    {
+        //Support agent started replying and status changed to in_progress
+        return SupportTicket::where('status', 'in_progress')->get();
+    }
+
+
+    //Auto answered
+    public static function AutoAnswer()
+    {
+        //Get all pending answers
+        foreach (self::PendingAnswers() as $ticket) {
+            //If message is available on ticket
+            if ($time = Message::LastCalculateTime($ticket->id)) {
+                //If time is greater than or equal to 12 hours then auto update ticket status
+                if ($time >= 24) {
+                    //Mark as answered
+                    self::MarkAnswered($ticket);
+                    //Return true
+                }
+            }
+        }
     }
 }

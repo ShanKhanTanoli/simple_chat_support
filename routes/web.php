@@ -1,10 +1,8 @@
 <?php
 
-use App\Models\User;
-use App\Helpers\Answer;
-use App\Helpers\Ticket;
-use App\Helpers\Question;
 use App\Models\Chat;
+use App\Helpers\Ticket;
+use App\Helpers\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,48 +25,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//agent token = 1|0EyvZh9HlqlV2bHyAZbyFvYcJa7wUebvGXtSS0dD
+
+//customer token = 2|YFSDuY4VtHQyH0nR4rdh9LJubE5n4a05dk3mu79g
+
 Route::get('debug', function () {
-
-    $customer_token = "1|VmRa12cB6BmCnqkCnZfMUYCBzJ2Kbx7rORezSfjx";
-
-    $customer_7_token = "2|b7J5hqthamah3wdtaWuZaBcyWD0jtohKDvM0ZgXh";
-
-    $agent_token = "3|2uX1Txz2ps0JVTzkMS5CLZ42qx4tpqdVvflYLKRA";
-
-    //agent
-    $agent = User::find(1);
-
-    //customer
-    $customer = User::find(4);
-
-    //chat
-    $chat = Chat::find(1);
-
-    //$ticket = Ticket::Open($customer->name, $customer->email, "Technical Support");
-
-    // $ticket = Ticket::Find(1);
-
-    // $chat = Chat::create([
-    //     'user_id' => $agent->id,
-    //     'support_ticket_id' => $ticket->id,
-    //     'body' => "Hi , how may i help you",
-    //     'parent_id' => 1,
-    // ]);
-
-    dd($chat->chats);
-
-    // dispatch(function () {
-
-    //     $ticket = Ticket::Find(1);
-
-    //     $ticket->update([
-    //         'status' => 'answered',
-    //     ]);
-    // })->delay(now()->addSeconds(2));
-
-    return "success";
-
-    //$token = $customer->createToken('auth-token')->plainTextToken;
+    //Auto update 
+    dispatch(function () {
+        //Auto Update
+        Ticket::AutoAnswer();
+    })->delay(now()->addSeconds(2));
 });
 
 Auth::routes();

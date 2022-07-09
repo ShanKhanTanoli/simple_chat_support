@@ -52,6 +52,8 @@
 
 - __SCOUT_QUEUE=true__
 
+- after that run this command __php artisan scout:import__
+
 ---
 ## For Database
 - __DB_DATABASE="YOUR DB"__
@@ -222,7 +224,7 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 - One way is to use __CRON JOB__.
 
-- I am using __CRON JOB__ here. I have created a __METHOD__ that will check if there is a __TICKET__ on which the __CUSTOMER__ did not reply for __24 hours__ then __STATUS__ will be changed to __ANSWERED__ automatically.
+- I am using __CRON JOB__ here. I have created a METHOD inside __Ticket Helper__ __Ticket::AutoAnswer()__ that will check if there is a __TICKET__ on which the __CUSTOMER__ did not reply for __24 hours__ then __STATUS__ will be changed to __ANSWERED__ automatically.
 
 - You can run this command __php artisan que:work__.
 
