@@ -109,7 +109,7 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 ---
 
-## Customer Ticket Api Operations (Customer Un-Authenticated)
+## Customer Ticket Api (Unregistered)
 
 - If customer is not registered
 
@@ -123,7 +123,7 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 ---
 
-## Customer Ticket Api Operations (Customer Authenticated)
+## Customer Ticket Api (Customer is Registered and Authenticated)
 
 - __View tickets__
 
@@ -135,9 +135,9 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 ---
 
-## Customer Chat Api Operations (Customer Authenticated)
+## Customer Chat Api (Customer is Registered and Authenticated)
 
-- __View chat on a ticket__
+- __View chat on a specific ticket__
 
 - __(GET REQUEST)__ URL/api/customer/chats/{ticket}/{token}
 
