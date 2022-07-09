@@ -139,7 +139,7 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 - __View chat on a specific ticket__
 
-- __(GET REQUEST)__ URL/api/customer/chats/{ticket}/{token}
+- __(GET REQUEST)__ URL/api/customer/chat/{ticket}/{token}
 
 - __Message on a specific ticket__
 
@@ -160,37 +160,6 @@ _ __MAIL_PASSWORD=Your Mail Password__
 - Base __API__ will be __URL/api/support__
 
 ---
-
-## Customer Ticket Api (Unregistered)
-
-- If it is a new customer or customer is not registered
-
-- __Open a new ticket__
-
-- __(POST REQUEST)__ URL/api/customer/newticket
-
-- It will __VALIDATE NAME , EMAIL and PASSWORD__ and It will __OPEN NEW TICKET__.
-
-- It will __REGISTER__ the __CUSTOMER__ and __PASSWORD => "password"__ in lowercase.
-
----
-
-## Customer Chat Api (Authenticated)
-
-- __View chat on a specific ticket__
-
-- __(GET REQUEST)__ URL/api/customer/chat/{ticket}/{token}
-
-- __Message on a specific ticket__
-
-- __(POST REQUEST)__ URL/api/customer/message/{ticket}/{token}
-
-- __Reply on a ticket to specific message__
-
-- __(POST REQUEST)__ URL/api/customer/reply/{message}/{ticket}/{token}
-
----
-
 ## Support Ticket Api (Authenticated)
 
 - __View tickets__
