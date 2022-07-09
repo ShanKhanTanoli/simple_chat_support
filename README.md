@@ -79,7 +79,7 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 ## Login Api
 
-- Login __(POST REQUEST)__ __YourURL/api/login__.
+- Login __(POST REQUEST)__ __URL/api/login__.
 
 - It expectes __Email__ and __Password__ otherwise __VALIDATION ERROR__.
 
@@ -91,7 +91,7 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 ## Register Api (Only customer can register)
 
-- Register __(POST REQUEST)__ __YourURL/api/register__.
+- Register __(POST REQUEST)__ __URL/api/register__.
 
 - It expectes __Name , Email__ and __Password__ otherwise __VALIDATION ERROR__.
 
@@ -105,31 +105,49 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 - Example __Route::middleware(['auth:sanctum'])->prefix('customer')->group();__
 
-- Base __API__ will be __YourURL/api/customer__
+- Base __API__ will be __URL/api/customer__
 
 ---
 
-## Customer Api Operations
+## Customer Ticket Api Operations (Customer Un-Authenticated)
+
+- If customer is not registered
+
+- __Open a ticket__
+
+- __(POST REQUEST)__ URL/api/customer/newticket
+
+- It will expect __NAME , EMAIL and PASSWORD__ and It will __OPEN NEW TICKET__.
+
+- It will __REGISTER__ the __CUSTOMER__ with __PASSWORD__ will be __"password"__ in lowercase.
+
+---
+
+## Customer Ticket Api Operations (Customer Authenticated)
 
 - __View tickets__
 
-- __(GET REQUEST)__ __YourURL/api/customer/{token}__.
+- __(GET REQUEST)__ URL/api/customer/tickets/{token}
 
-- __Ask question on a ticket__
+- __Open a ticket__
 
-- __(POST REQUEST)__ __YourURL/api/customer/askquestion/{ticket}/{token}__.
+- __(POST REQUEST)__ URL/api/customer/openticket/{token}
 
-- __Answer on a ticket to specific question__
+---
 
-- __(POST REQUEST)__ __YourURL/api/customer/giveanswer/{ticket}/{question}/{token}__.
+## Customer Chat Api Operations (Customer Authenticated)
 
-- __View asked questions on a specific ticket__
+- __View chat on a ticket__
 
-- __(GET REQUEST)__ __YourURL/api/customer/questions/{ticket}/{token}__.
+- __(GET REQUEST)__ URL/api/customer/chats/{ticket}/{token}
 
-- __View answers on a specific question__
+- __Message on a specific ticket__
 
-- __(GET REQUEST)__ __YourURL/api/customer/answers/{question}/{token}__.
+- __(POST REQUEST)__ URL/api/customer/message/{ticket}/{token}
+
+- __Reply on a ticket to specific message__
+
+- __(POST REQUEST)__ URL/api/customer/reply/{message}/{ticket}/{token}
 
 ---
 
@@ -139,58 +157,58 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 - Example __Route::middleware(['auth:sanctum'])->prefix('support')->group();__
 
-- Base __API__ will be __YourURL/api/support__
+- Base __API__ will be __URL/api/support__
 
 ---
 ## Support Api Operations
 
 - __Can view all tickets__
 
-- __(GET REQUEST)__ __YourURL/api/support/{token}__.
+- __(GET REQUEST)__ __URL/api/support/{token}__.
 
 - __Ask Question on a specific ticket__
 
-- __(POST REQUEST)__ __YourURL/api/support/askquestion/{ticket}/{token}__.
+- __(POST REQUEST)__ __URL/api/support/askquestion/{ticket}/{token}__.
 
 - __Answer on a ticket to a specific question__
 
-- __(POST REQUEST)__ __YourURL/api/support/giveanswer/{ticket}/{question}/{token}__.
+- __(POST REQUEST)__ __URL/api/support/giveanswer/{ticket}/{question}/{token}__.
 
 - __View asked questions on a specific ticket__
 
-- __(GET REQUEST)__ __YourURL/api/support/questions/{ticket}/{token}__.
+- __(GET REQUEST)__ __URL/api/support/questions/{ticket}/{token}__.
 
 - __View answers on a specific question__
 
-- __(GET REQUEST)__ __YourURL/api/support/answers/{question}/{token}__.
+- __(GET REQUEST)__ __URL/api/support/answers/{question}/{token}__.
 
 - __Marked as answered__
 
-- __(POST REQUEST)__ __YourURL/api/support/markanswered/{ticket}/{token}__.
+- __(POST REQUEST)__ __URL/api/support/markanswered/{ticket}/{token}__.
 
 - __Marked as not answered__
 
-- __(POST REQUEST)__ __YourURL/api/support/marknotanswered/{ticket}/{token}__.
+- __(POST REQUEST)__ __URL/api/support/marknotanswered/{ticket}/{token}__.
 
 - __Marked as spam__
 
-- __(POST REQUEST)__ __YourURL/api/support/markspam/{ticket}/{token}__.
+- __(POST REQUEST)__ __URL/api/support/markspam/{ticket}/{token}__.
 
 - __Mark in progress__
 
-- __(POST REQUEST)__ __YourURL/api/support/markinprogress/{ticket}/{token}__.
+- __(POST REQUEST)__ __URL/api/support/markinprogress/{ticket}/{token}__.
 
 - __Search ticket__
 
-- __(GET REQUEST)__ __YourURL/api/support/searchticket/{token}__.
+- __(GET REQUEST)__ __URL/api/support/searchticket/{token}__.
 
 - __Search question__
 
-- __(GET REQUEST)__ __YourURL/api/support/searchquestion/{token}__.
+- __(GET REQUEST)__ __URL/api/support/searchquestion/{token}__.
 
 - __Search answer__
 
-- __(GET REQUEST)__ __YourURL/api/support/searchanswer/{token}__.
+- __(GET REQUEST)__ __URL/api/support/searchanswer/{token}__.
 
 ---
 
