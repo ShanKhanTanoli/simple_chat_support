@@ -2,9 +2,9 @@
 
 namespace App\Helpers;
 
-use App\Models\Answer as AnswerModel;
+use App\Models\Chat;
 
-class Answer
+class Reply
 {
 
     //change ticket status to in progresss
@@ -19,28 +19,17 @@ class Answer
         }
     }
 
-    //Start answering
-    public static function Start($ticket, $question, $user, $body)
+    //Reply to a message
+    public static function To($user, $ticket, $parent_id, $body)
     {
-        //change ticket status to in progress
+        //Change ticket status to progress when start replying
         self::TicketInProgress($ticket, $user);
-        //Return this Answer
-        return AnswerModel::create([
-            'question_id' => $question->id,
+        //Return this
+        return Chat::create([
             'user_id' => $user->id,
+            'support_ticket_id' => $ticket->id,
+            'parent_id' => $parent_id,
             'body' => $body,
         ]);
-    }
-
-    //Find Answer
-    public static function Find($id)
-    {
-        return AnswerModel::find($id);
-    }
-
-    //Search answer with algolia
-    public static function Search($query)
-    {
-        return AnswerModel::search($query)->get();
     }
 }

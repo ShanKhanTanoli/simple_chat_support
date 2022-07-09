@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Message;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,17 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('answers', function (Blueprint $table) {
+        Schema::create('chats', function (Blueprint $table) {
             $table->id();
-
-            //Thread foreign key
-            $table->unsignedBigInteger('question_id')
-                ->nullable();
-            $table->foreign('question_id')
-                ->references('id')
-                ->on('questions')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
 
             //User foreign key
             $table->unsignedBigInteger('user_id')
@@ -35,6 +25,17 @@ return new class extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
+            //Support ticket foreign key
+            $table->unsignedBigInteger('support_ticket_id')
+                ->nullable();
+            $table->foreign('support_ticket_id')
+                ->references('id')
+                ->on('support_tickets')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            //Parent ID for chat threads
+            $table->unsignedBigInteger('parent_id')->nullable();
 
             $table->longText('body')->nullable();
 
@@ -49,6 +50,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('answers');
+        Schema::dropIfExists('chats');
     }
 };

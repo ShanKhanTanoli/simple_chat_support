@@ -4,6 +4,7 @@ use App\Models\User;
 use App\Helpers\Answer;
 use App\Helpers\Ticket;
 use App\Helpers\Question;
+use App\Models\Chat;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,19 +29,36 @@ Route::get('/', function () {
 
 Route::get('debug', function () {
 
+    //agent
+    $agent = User::find(1);
+
     //customer
     $customer = User::find(4);
 
-    $ticket = Ticket::Open($customer->name, $customer->email, "Technical Support");
+    //chat
+    $chat = Chat::find(1);
 
-    dispatch(function () {
+    //$ticket = Ticket::Open($customer->name, $customer->email, "Technical Support");
 
-        $ticket = Ticket::Find(1);
+    // $ticket = Ticket::Find(1);
 
-        $ticket->update([
-            'status' => 'answered',
-        ]);
-    })->delay(now()->addSeconds(2));
+    // $chat = Chat::create([
+    //     'user_id' => $agent->id,
+    //     'support_ticket_id' => $ticket->id,
+    //     'body' => "Hi , how may i help you",
+    //     'parent_id' => 1,
+    // ]);
+
+    dd($chat->chats);
+
+    // dispatch(function () {
+
+    //     $ticket = Ticket::Find(1);
+
+    //     $ticket->update([
+    //         'status' => 'answered',
+    //     ]);
+    // })->delay(now()->addSeconds(2));
 
     return "success";
 
