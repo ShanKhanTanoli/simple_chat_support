@@ -29,6 +29,10 @@ Route::get('/', function () {
 
 Route::get('debug', function () {
 
+    $customer_token = "1|VmRa12cB6BmCnqkCnZfMUYCBzJ2Kbx7rORezSfjx";
+
+    $customer_7_token = "2|b7J5hqthamah3wdtaWuZaBcyWD0jtohKDvM0ZgXh";
+
     //agent
     $agent = User::find(1);
 

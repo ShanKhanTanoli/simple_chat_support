@@ -3,17 +3,16 @@
 namespace App\Models;
 
 use App\Models\User;
-use App\Models\Answer;
-use App\Models\Question;
+use App\Models\Chat;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SupportTicket extends Model
 {
-    use HasFactory,Searchable;
+    use HasFactory, Searchable;
 
-    protected $fillable = ['ticket','user_id', 'support_type', 'status'];
+    protected $fillable = ['ticket', 'user_id', 'support_type', 'status'];
 
     //Ticket belongs to user
     public function user()
@@ -21,15 +20,9 @@ class SupportTicket extends Model
         return $this->belongsTo(User::class);
     }
 
-    //User has many questions
-    public function questions()
+    //User has many chats
+    public function chats()
     {
-        return $this->hasMany(Question::class);
-    }
-
-    //User has many answers
-    public function answers()
-    {
-        return $this->hasMany(Answer::class);
+        return $this->hasMany(Chat::class);
     }
 }

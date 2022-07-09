@@ -1,35 +1,36 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\Customer\CustomerController;
+use App\Http\Controllers\Api\Customer\CustomerChatController;
+use App\Http\Controllers\Api\Customer\CustomerTicketController;
 
 /*Begin::Authenticated Customer API*/
 
 Route::middleware(['auth:sanctum'])->prefix('customer')->group(function () {
 
+    /*Begin::Ticket*/
     //View all tickets
-    Route::get('tickets/{token}', [CustomerController::class, 'tickets'])
+    Route::get('tickets/{token}', [CustomerTicketController::class, 'Tickets'])
         ->name('CustomerViewTickets');
 
     //Open a ticket
-    Route::post('openticket/{token}', [CustomerController::class, 'openticket'])
+    Route::post('openticket/{token}', [CustomerTicketController::class, 'OpenTicket'])
         ->name('CustomerOpenTicket');
+    /*End::Ticket*/
 
-    //Ask a question
-    Route::post('askquestion/{ticket}/{token}', [CustomerController::class, 'askquestion'])
-        ->name('CustomerAskQuestion');
+    /*Begin::Chat*/
+    //View chat on a ticket
+    Route::get('chat/{ticket}/{token}', [CustomerChatController::class, 'Chat'])
+        ->name('CustomerChat');
 
-    //Give an answer to a question
-    Route::post('giveanswer/{ticket}/{question}/{token}', [CustomerController::class, 'giveanswer'])
-        ->name('CustomerGiveAnswer');
+    //Send message on a ticket
+    Route::post('message/{ticket}/{token}', [CustomerChatController::class, 'Message'])
+        ->name('CustomerMessage');
 
-    //View all questions on a ticket
-    Route::get('questions/{ticket}/{token}', [CustomerController::class, 'questions'])
-        ->name('CustomerViewQuestions');
-
-    //View all answers on a question
-    Route::get('answers/{question}/{token}', [CustomerController::class, 'answers'])
-        ->name('CustomerViewAnswers');
+    //Reply to message on a ticket
+    Route::post('reply/{message}/{ticket}/{token}', [CustomerChatController::class, 'Reply'])
+        ->name('CustomerReply');
+    /*End::Chat*/
 });
 /*End::Authenticated Customer API*/
 
@@ -37,7 +38,7 @@ Route::middleware(['auth:sanctum'])->prefix('customer')->group(function () {
 Route::prefix('customer')->group(function () {
 
     //Open a new ticket while unauthenticated
-    Route::post('newticket', [CustomerController::class, 'newticket'])
+    Route::post('newticket', [CustomerTicketController::class, 'newticket'])
         ->name('CustomerNewTicket');
 });
     /*End::Unauthenticated Customer API*/

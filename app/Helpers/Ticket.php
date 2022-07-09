@@ -99,6 +99,20 @@ class Ticket
         return SupportTicket::find($id);
     }
 
+    //Ticket chats
+    public static function Chats($id)
+    {
+        return SupportTicket::find($id)->chats;
+    }
+
+    //Ticket message
+    public static function Message($ticket, $message)
+    {
+        return SupportTicket::find($ticket)
+            ->chats
+            ->find($message);
+    }
+
     //Find ticket user
     public static function User($id)
     {

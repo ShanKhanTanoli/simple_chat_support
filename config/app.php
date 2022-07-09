@@ -214,6 +214,8 @@ return [
         'Message' => App\Helpers\Message::class,
         'Reply' => App\Helpers\Reply::class,
         'Chat' => App\Helpers\Chat::class,
+        'Customer' => App\Helpers\Customer::class,
+        'Support' => App\Helpers\Support::class,
 
     ])->toArray(),
 
