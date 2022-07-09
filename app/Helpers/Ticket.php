@@ -51,8 +51,8 @@ class Ticket
         ]);
     }
 
-    //Mark as answered
-    public static function MarkAnswered($user, $ticket)
+    //Send answered notification
+    public static function AnsweredNotification($user, $ticket)
     {
         //pass the data to view
         $data = [
@@ -66,9 +66,6 @@ class Ticket
 
         //Send Notification Mail
         Mail::send(new TicketAnswered($data));
-        return $ticket->update([
-            'status' => "answered",
-        ]);
     }
 
     //Mark as not answered
@@ -77,6 +74,22 @@ class Ticket
         return $ticket->update([
             'status' => "not_answered",
         ]);
+    }
+
+    //Mark as answered
+    public static function MarkAnswered($ticket)
+    {
+        //If customer found
+        if ($customer = User::find($ticket->user_id)) {
+            //Send notification email to customer
+            self::AnsweredNotification($customer, $ticket);
+            //Change status
+            $ticket->update([
+                'status' => "answered",
+            ]);
+            return true;
+        //If customer not found
+        }else return false;
     }
 
     //Mark as spam

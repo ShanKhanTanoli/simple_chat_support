@@ -33,6 +33,8 @@ Route::get('debug', function () {
 
     $customer_7_token = "2|b7J5hqthamah3wdtaWuZaBcyWD0jtohKDvM0ZgXh";
 
+    $agent_token = "3|2uX1Txz2ps0JVTzkMS5CLZ42qx4tpqdVvflYLKRA";
+
     //agent
     $agent = User::find(1);
 
@@ -67,12 +69,6 @@ Route::get('debug', function () {
     return "success";
 
     //$token = $customer->createToken('auth-token')->plainTextToken;
-
-    $token = "1|zfbTpMh4Icz7xXMQOGVutZA93j54Zvt5f9LGisVm";
-
-    $agent_token = "2|Y9F8sZYaEafdfNwv10TpFPVv04B9OEoRTsm1PEGN";
-
-    dd($token);
 });
 
 Auth::routes();

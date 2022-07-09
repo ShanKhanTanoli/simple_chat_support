@@ -24,4 +24,14 @@ class Chat extends Model
     {
         return $this->belongsTo(Chat::class, 'parent_id');
     }
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'user_id',
+        'parent_id',
+    ];
 }
