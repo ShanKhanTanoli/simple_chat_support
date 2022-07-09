@@ -111,19 +111,19 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 ## Customer Ticket Api (Unregistered)
 
-- If customer is not registered
+- If it is a new customer or customer is not registered
 
-- __Open a ticket__
+- __Open a new ticket__
 
 - __(POST REQUEST)__ URL/api/customer/newticket
 
-- It will expect __NAME , EMAIL and PASSWORD__ and It will __OPEN NEW TICKET__.
+- It will __VALIDATE NAME , EMAIL and PASSWORD__ and It will __OPEN NEW TICKET__.
 
-- It will __REGISTER__ the __CUSTOMER__ with __PASSWORD__ will be __"password"__ in lowercase.
+- It will __REGISTER__ the __CUSTOMER__ and __PASSWORD => "password"__ in lowercase.
 
 ---
 
-## Customer Ticket Api (Customer is Registered and Authenticated)
+## Customer Ticket Api (Registered and Authenticated)
 
 - __View tickets__
 
@@ -135,7 +135,7 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 ---
 
-## Customer Chat Api (Customer is Registered and Authenticated)
+## Customer Chat Api (Registered and Authenticated)
 
 - __View chat on a specific ticket__
 
@@ -160,55 +160,90 @@ _ __MAIL_PASSWORD=Your Mail Password__
 - Base __API__ will be __URL/api/support__
 
 ---
-## Support Api Operations
 
-- __Can view all tickets__
+## Customer Ticket Api (Unregistered)
 
-- __(GET REQUEST)__ __URL/api/support/{token}__.
+- If it is a new customer or customer is not registered
 
-- __Ask Question on a specific ticket__
+- __Open a new ticket__
 
-- __(POST REQUEST)__ __URL/api/support/askquestion/{ticket}/{token}__.
+- __(POST REQUEST)__ URL/api/customer/newticket
 
-- __Answer on a ticket to a specific question__
+- It will __VALIDATE NAME , EMAIL and PASSWORD__ and It will __OPEN NEW TICKET__.
 
-- __(POST REQUEST)__ __URL/api/support/giveanswer/{ticket}/{question}/{token}__.
+- It will __REGISTER__ the __CUSTOMER__ and __PASSWORD => "password"__ in lowercase.
 
-- __View asked questions on a specific ticket__
+---
 
-- __(GET REQUEST)__ __URL/api/support/questions/{ticket}/{token}__.
+## Customer Chat Api (Authenticated)
 
-- __View answers on a specific question__
+- __View chat on a specific ticket__
 
-- __(GET REQUEST)__ __URL/api/support/answers/{question}/{token}__.
+- __(GET REQUEST)__ URL/api/customer/chat/{ticket}/{token}
 
-- __Marked as answered__
+- __Message on a specific ticket__
 
-- __(POST REQUEST)__ __URL/api/support/markanswered/{ticket}/{token}__.
+- __(POST REQUEST)__ URL/api/customer/message/{ticket}/{token}
 
-- __Marked as not answered__
+- __Reply on a ticket to specific message__
 
-- __(POST REQUEST)__ __URL/api/support/marknotanswered/{ticket}/{token}__.
+- __(POST REQUEST)__ URL/api/customer/reply/{message}/{ticket}/{token}
 
-- __Marked as spam__
+---
 
-- __(POST REQUEST)__ __URL/api/support/markspam/{ticket}/{token}__.
+## Support Ticket Api (Authenticated)
 
-- __Mark in progress__
+- __View tickets__
 
-- __(POST REQUEST)__ __URL/api/support/markinprogress/{ticket}/{token}__.
+- __(GET REQUEST)__ URL/api/support/tickets/{token}
 
-- __Search ticket__
+- __Open a ticket__
 
-- __(GET REQUEST)__ __URL/api/support/searchticket/{token}__.
+- __(POST REQUEST)__ URL/api/support/openticket/{token}
 
-- __Search question__
+- __Mark ticket as spam__
 
-- __(GET REQUEST)__ __URL/api/support/searchquestion/{token}__.
+- __(POST REQUEST)__ URL/api/support/markspam/{ticket}/{token}
 
-- __Search answer__
+- __Mark ticket as answered__ It will also __SEND NOTIFICATION EMAIL__ to __CUSTOMER__
 
-- __(GET REQUEST)__ __URL/api/support/searchanswer/{token}__.
+- __(POST REQUEST)__ URL/api/support/markanswered/{ticket}/{token}
+
+- __Mark ticket as not answered__
+
+- __(POST REQUEST)__ URL/api/support/marknotanswered/{ticket}/{token}
+
+- __Mark ticket as in progress__
+
+- __(POST REQUEST)__ URL/api/support/markinprogress/{ticket}/{token}
+
+- __Search ticket__ Powered by __ALGOLIA__
+
+- It will expect __query__ for __SEARCH__ and __VALIDATE__
+
+- __(GET REQUEST)__ URL/api/support/ticketsearch/{token}
+
+---
+
+## Support Chat Api (Authenticated)
+
+- __View chat on a specific ticket__
+
+- __(GET REQUEST)__ URL/api/support/chat/{ticket}/{token}
+
+- __Message on a specific ticket__
+
+- __(POST REQUEST)__ URL/api/support/message/{ticket}/{token}
+
+- __Reply on a ticket to specific message__
+
+- __(POST REQUEST)__ URL/api/support/reply/{message}/{ticket}/{token}
+
+- __Search chat__ Powered by __ALGOLIA__
+
+- It will expect __query__ for __SEARCH__ and __VALIDATE__
+
+- __(GET REQUEST)__ URL/api/support/chatsearch/{token}
 
 ---
 
