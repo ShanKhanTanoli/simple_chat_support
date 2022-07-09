@@ -85,7 +85,7 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 - Use any __EMAIL__ from __USERS TABLE__ and __PASSWORD__ will be __"password"__ in lowercase.
 
-- It will return you user details with __token__.
+- It will return you __CUSTOMER/SUPPORT__ with __TOKEN__.
 
 ---
 
@@ -95,7 +95,7 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 - It expectes __Name , Email__ and __Password__ otherwise __VALIDATION ERROR__.
 
-- It will return you user details with __token__. 
+- It will return you __CUSTOMER__ with __TOKEN__. 
 
 ---
 
@@ -218,22 +218,27 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 ## Auto Update Status (Task Scheduling)
 
-- There are a lot of ways that we can archieve this goal
+- There are a lot of ways that we can archieve this goal.
 
 - One way is to use __CRON JOB__.
 
-- I am using __CRON JOB__ here. I have created a __METHOD__ that will check if there is a __TICKET__ on which the __CUSTOMER__ did not reply for __24 hours__ then change __STATUS__ to __ANSWERED__.
+- I am using __CRON JOB__ here. I have created a __METHOD__ that will check if there is a __TICKET__ on which the __CUSTOMER__ did not reply for __24 hours__ then __STATUS__ will be changed to __ANSWERED__ automatically.
 
-- You can run this command __php artisan que:work__ It will update the __Tickets STATUS__ to __ANSWERED__ where __CUSTOMER__ did not reply for __24 hours__.
+- You can run this command __php artisan que:work__.
+
+- It will update the __Ticket STATUS__ to __ANSWERED__ where __CUSTOMER__ did not reply for __24 hours__.
+
 ---
 
 ## Helpers Methods
 
 - __Helpers__ are available in this __namespace App\Helpers;__.
 
-- Available __Helpers__ are __Answer , Question , Ticket__.
+- __Helpers =>__ Chat , Message , Reply , Support and Ticket.
 
-- You can use Helper Methods.
+- Various __METHODS__ are available on __Helpers__.
+
+- You can use __Helper METHODS__.
 
 ---
 
