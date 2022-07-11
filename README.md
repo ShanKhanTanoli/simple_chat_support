@@ -113,7 +113,7 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 - Login __(POST REQUEST)__ __URL/api/login__.
 
-- It expectes __Email__ and __Password__ otherwise __VALIDATION ERROR__.
+- It requires __Email__ and __Password__ otherwise __VALIDATION ERROR__.
 
 - Use any __EMAIL__ from __USERS TABLE__ and __PASSWORD__ will be __"password"__ in lowercase.
 
@@ -125,7 +125,7 @@ _ __MAIL_PASSWORD=Your Mail Password__
 
 - Register __(POST REQUEST)__ __URL/api/register__.
 
-- It expectes __Name , Email__ and __Password__ otherwise __VALIDATION ERROR__.
+- It requires __Name , Email__ and __Password__ otherwise __VALIDATION ERROR__.
 
 - It will return you __CUSTOMER__ with __TOKEN__. 
 
