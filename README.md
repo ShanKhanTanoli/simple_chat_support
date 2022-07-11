@@ -1,8 +1,38 @@
-## Introduction
+## Project Overview
 
-- Project __Online Support System on Laravel 9.19.__
+Create a simple backend for an online support system where the customer will ask questions and the support team will answer.
+ 
+- When the customer asks a question the first and default status of the question should be "Not Answered" and as the support team reply then the status will change to "In Progress" and as the customer is satisfied with the response then the support team can change the status to "Answered". If the support team answered the question and then the customer has not replied again for 24 hours then the question status should automatically change to "Answered"
+ 
+- Think and implement like you're working on a very large-scale project where customers will ask thousands of questions daily.
+ 
+This is some a kind of chatting application
+ 
+__Customer Side Features:__
 
-- Framework __Laravel V 9.19.__
+- The customer should see all his questions of all statuses ("Not Answered", "In Progress" and "Answered")
+- The customer can ask a new question
+ 
+__Support Team Features:__
+
+-1.            Can see and search questions based on a customer name or question status
+
+-2.            Can mark the question as "SPAM". This is a kind of 4th status for the question
+
+-3.            When the question is answered the customer should be notified by email
+ 
+__Tools and Technologies you should use:__
+
+-1.            Laravel for APIs
+
+-2.            JWT/Password/Sanctum for authentication
+
+-3.            MySQL as RDBMS
+
+-4.            You can use any other laravel plugin which you want
+
+-5.            For a specific function like searching if you want to use something better like Algolia or Elastic search then you should use
+
 
 ---
 ## Author
