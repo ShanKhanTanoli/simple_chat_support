@@ -1,4 +1,4 @@
-## Project Overview
+## Project Overview (Laravel V9.19)
 
 Create a simple backend for an online support system where the customer will ask questions and the support team will answer.
  
@@ -15,23 +15,23 @@ __Customer Side Features:__
  
 __Support Team Features:__
 
--1.            Can see and search questions based on a customer name or question status
+- Can see and search questions based on a customer name or question status
 
--2.            Can mark the question as "SPAM". This is a kind of 4th status for the question
+- Can mark the question as "SPAM". This is a kind of 4th status for the question
 
--3.            When the question is answered the customer should be notified by email
+- When the question is answered the customer should be notified by email
  
 __Tools and Technologies you should use:__
 
--1.            Laravel for APIs
+- Laravel for APIs
 
--2.            JWT/Password/Sanctum for authentication
+- JWT/Password/Sanctum for authentication
 
--3.            MySQL as RDBMS
+- MySQL as RDBMS
 
--4.            You can use any other laravel plugin which you want
+- You can use any other laravel plugin which you want
 
--5.            For a specific function like searching if you want to use something better like Algolia or Elastic search then you should use
+- For a specific function like searching if you want to use something better like Algolia or Elastic search then you should use
 
 
 ---
